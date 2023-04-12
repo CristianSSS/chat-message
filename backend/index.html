@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        section{
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container-chat{
+            padding: 10px;
+            background-color: tomato;
+            height: 100vh;
+            width: 100%;
+            max-width: 800px;
+            min-width: 300px;
+            min-height: 500px;
+        }
+        .chat-layout{
+            height: 100%;
+            width: 100%;
+            background-color: rgb(96, 145, 187);
+            
+        }
+        .chat-boxes-container{
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .chat-msg-container{
+            padding: 10px;
+            height: 90%;
+            width: 100%;
+            background-color: aliceblue ;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+        }
+        .chat-inputs{
+            height: 10%;
+            width: 100%;
+        }
+        form{
+            display: flex;
+        }
+        .input{
+            width: 70%;
+        }
+        .input input{
+            width: 100%;
+            height: 100%;
+        }
+        .btn{
+            width: 30%;
+            
+        }
+        .btn button{
+            width: 100%;
+            height: 100%;
+        }
+
+
+        /* msg */
+        .msg{
+            
+            
+        }
+
+        .msg-remitente-container{
+            display: flex;
+            justify-content: end;
+        }
+        .msg-receptor-container{
+            display: flex;
+            justify-content: start;
+        }
+
+        .mensaje{
+            width: auto;
+            padding: 10px;
+            border-radius: 20px;
+            box-shadow: 0px 2px 5px 1px rgba(114, 114, 114, 0.171);
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div class="container-chat">
+            <div class="chat-layout">
+                <div class="chat-boxes-container">
+                    <div class="chat-boxes chat-msg-container">
+
+                        <div class=" msg msg-remitente-container">
+                            <div class="mensaje">
+                                <p>hola!</p>
+                            </div>
+                            
+                        </div>
+
+                        <div class="msg msg-receptor-container">
+                            <div class="mensaje">
+                                <p>hola como estas!</p>
+                            </div>
+                            
+                        </div>
+
+                        <div class=" msg msg-remitente-container">
+                            <div class="mensaje">
+                                <p>hola!</p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="chat-boxes chat-inputs">
+                        <form action="" id="form">
+                            <div class="input"><input type="text" id="text"></div>
+                            <div class="btn"><button type="submit">Enviar</button></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script type="module">
+        const socket = io();
+        const form=document.getElementById("form");
+        const txt=document.getElementById("text");
+
+        form.addEventListener("submit",(e)=>{
+            e.preventDefault();
+            
+            if(txt.value){
+                socket.emit("msg-chat", txt.value);
+
+                txt.value="";
+            }
+            
+        })
+        
+      </script>
+</body>
+</html>
